@@ -3,626 +3,564 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5" />
-  <title>Fork & Flame · Modern Restaurant</title>
+  <title>Fork & Flame · Complete Restaurant Website</title>
   <!-- Font Awesome 6 (free) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-  <!-- Google Font: Inter + Playfair Display -->
+  <!-- Google Fonts: Playfair Display + Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet" />
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    /* ----- RESET & BASE ----- */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      background: #fcf8f3;
+      background: #f6f2ec;
       font-family: 'Inter', sans-serif;
-      color: #1e1e2a;
-      padding: 1.5rem 1rem 3rem;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      color: #1e1a16;
+      line-height: 1.6;
     }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; }
 
     .container {
-      max-width: 1280px;
-      width: 100%;
-      background: white;
-      border-radius: 2.5rem;
-      box-shadow: 0 25px 50px -10px rgba(0, 0, 0, 0.08), 0 8px 20px rgba(0, 0, 0, 0.02);
-      padding: 2rem 2rem 2.5rem;
-      transition: 0.2s;
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
     }
 
-    /* ---------- header / branding ---------- */
-    .resto-header {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
+    /* ----- BUTTONS ----- */
+    .btn-primary {
+      display: inline-flex;
       align-items: center;
-      margin-bottom: 2.5rem;
-      padding-bottom: 1rem;
-      border-bottom: 2px solid #f0ebe3;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 0.7rem;
-    }
-
-    .brand i {
-      font-size: 2.4rem;
-      color: #c73d2f;
-      background: #fce9e5;
-      padding: 0.5rem;
-      border-radius: 18px;
-    }
-
-    .brand h1 {
-      font-family: 'Playfair Display', serif;
-      font-weight: 700;
-      font-size: 2rem;
-      letter-spacing: -0.5px;
-      color: #1e1e2a;
-    }
-
-    .brand span {
-      color: #c73d2f;
-    }
-
-    .tagline {
-      background: #f5efe8;
-      padding: 0.4rem 1.4rem;
-      border-radius: 60px;
-      font-weight: 500;
-      font-size: 0.9rem;
-      color: #4a3f38;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .tagline i {
-      color: #c73d2f;
-    }
-
-    /* ---------- category filter (tabs) ---------- */
-    .menu-tabs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem 0.8rem;
-      margin-bottom: 2.4rem;
-      padding: 0.2rem 0;
-    }
-
-    .tab-btn {
-      background: #f2ede7;
-      border: none;
-      padding: 0.7rem 1.8rem;
+      gap: 0.6rem;
+      background: #1e1a16;
+      color: #fff;
+      padding: 0.75rem 2.2rem;
       border-radius: 60px;
       font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: 0.25s ease;
       font-size: 0.95rem;
+      box-shadow: 0 6px 18px -6px rgba(0,0,0,0.15);
+    }
+    .btn-primary:hover { background: #b34a3c; transform: translateY(-2px); box-shadow: 0 12px 28px -12px rgba(179,74,60,0.3); }
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      border: 1.5px solid #c4b4a4;
+      padding: 0.5rem 1.8rem;
+      border-radius: 60px;
+      font-weight: 600;
       color: #3d352e;
       cursor: pointer;
       transition: 0.2s;
+      font-size: 0.9rem;
+    }
+    .btn-outline:hover { background: white; border-color: #8a7a6a; }
+
+    /* ----- HEADER / NAV ----- */
+    .site-header {
+      background: #ffffff;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid #ede7e0;
+    }
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .logo {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+      gap: 0.6rem;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.6rem;
+    }
+    .logo i { color: #b34a3c; font-size: 1.8rem; }
+    .logo span { color: #b34a3c; }
+    .nav-links {
+      display: flex;
+      gap: 0.5rem 1.8rem;
+      flex-wrap: wrap;
+      align-items: center;
+      font-weight: 500;
+    }
+    .nav-links a { transition: color 0.2s; }
+    .nav-links a:hover { color: #b34a3c; }
+    .nav-links .btn-primary { font-size: 0.85rem; padding: 0.5rem 1.6rem; }
+
+    /* ----- HERO ----- */
+    .hero {
+      padding: 4rem 0 3rem;
+      text-align: center;
+      background: linear-gradient(145deg, #fcfaf8 0%, #f6f2ec 100%);
+      border-radius: 2.5rem;
+      margin: 1.5rem 0 2.5rem;
+      box-shadow: inset 0 -2px 10px rgba(0,0,0,0.02);
+    }
+    .hero h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.2rem;
+      font-weight: 700;
+      letter-spacing: -1px;
+      line-height: 1.2;
+      max-width: 700px;
+      margin: 0 auto 1rem;
+    }
+    .hero h2 span { color: #b34a3c; }
+    .hero p {
+      font-size: 1.2rem;
+      color: #5f5348;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+    .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* ----- SECTION TITLES ----- */
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.5px;
+    }
+    .section-sub {
+      color: #7a6a5c;
+      margin-bottom: 2rem;
+      font-size: 1rem;
+    }
+    .section-divider {
+      width: 60px;
+      height: 3px;
+      background: #b34a3c;
+      margin: 0.5rem 0 1.8rem;
+      border-radius: 4px;
+    }
+
+    /* ----- MENU SECTION (with filters) ----- */
+    .menu-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem 0.8rem;
+      margin-bottom: 2rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #ede7e0;
+    }
+    .tab-btn {
+      background: transparent;
+      border: none;
+      padding: 0.5rem 1.8rem;
+      border-radius: 60px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      color: #5f5348;
+      cursor: pointer;
+      transition: 0.2s;
       border: 1px solid transparent;
     }
+    .tab-btn i { margin-right: 0.4rem; color: #8a7a6a; }
+    .tab-btn:hover { background: #f1ebe4; }
+    .tab-btn.active { background: #1e1a16; color: white; box-shadow: 0 8px 20px -8px rgba(0,0,0,0.15); }
+    .tab-btn.active i { color: #f5d6b3; }
 
-    .tab-btn i {
-      font-size: 1rem;
-      color: #7a6a5c;
-    }
-
-    .tab-btn:hover {
-      background: #e6ddd4;
-      transform: translateY(-2px);
-    }
-
-    .tab-btn.active {
-      background: #c73d2f;
-      color: white;
-      box-shadow: 0 8px 18px -6px rgba(199, 61, 47, 0.3);
-      border-color: #c73d2f;
-    }
-
-    .tab-btn.active i {
-      color: white;
-    }
-
-    /* ---------- menu grid ---------- */
     .menu-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
       gap: 1.8rem;
-      margin: 1.8rem 0 1.2rem;
+      margin: 1.5rem 0 2rem;
     }
-
     .menu-item {
-      background: #fbf9f6;
+      background: #fff;
       border-radius: 1.8rem;
-      padding: 1.6rem 1.4rem 1.4rem;
-      transition: 0.25s ease;
-      border: 1px solid #f0ebe3;
+      padding: 1.6rem;
+      border: 1px solid #ede7e0;
+      transition: 0.3s;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 4px 8px -6px rgba(0,0,0,0.02);
     }
-
-    .menu-item:hover {
-      background: white;
-      border-color: #dacfc4;
-      box-shadow: 0 18px 30px -14px rgba(0, 0, 0, 0.08);
-      transform: translateY(-4px);
-    }
-
-    .menu-item .item-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 0.4rem;
-    }
-
-    .menu-item h3 {
-      font-family: 'Playfair Display', serif;
-      font-weight: 600;
-      font-size: 1.3rem;
-      letter-spacing: -0.2px;
-      color: #1e1e2a;
-    }
-
-    .menu-item .price {
-      font-weight: 700;
-      font-size: 1.3rem;
-      color: #c73d2f;
-      background: #fce9e5;
-      padding: 0.1rem 1rem;
-      border-radius: 60px;
-      font-family: 'Inter', sans-serif;
-      white-space: nowrap;
-    }
-
-    .menu-item .desc {
-      color: #5f5348;
-      font-size: 0.95rem;
-      line-height: 1.5;
-      margin: 0.3rem 0 0.8rem;
-      flex: 1;
-    }
-
-    .menu-item .badge-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 0.3rem;
-    }
-
-    .badge {
-      background: #f0ebe3;
-      padding: 0.2rem 0.9rem;
-      border-radius: 60px;
-      font-size: 0.7rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
-      color: #4a3f38;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.2rem;
-    }
-
-    .badge i {
-      font-size: 0.65rem;
-      color: #c73d2f;
-    }
-
-    .badge.veg {
-      background: #e1f3e1;
-      color: #1f6d3b;
-    }
-
-    .badge.spicy {
-      background: #fce1d9;
-      color: #b13e2b;
-    }
-
-    .badge.popular {
-      background: #f7edd4;
-      color: #9e7a3e;
-    }
-
-    /* ---------- interactive cart / order bar ---------- */
-    .order-bar {
-      margin-top: 2.8rem;
-      background: #f5efe8;
-      border-radius: 2rem;
-      padding: 1.2rem 2rem;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.2rem;
-      border: 1px solid #e7ddd2;
-    }
-
-    .order-bar .cart-info {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .order-bar .cart-info i {
-      font-size: 1.8rem;
-      color: #c73d2f;
-      background: white;
-      padding: 0.6rem;
-      border-radius: 60px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.02);
-    }
-
-    .order-bar .cart-info span {
-      font-weight: 600;
-      font-size: 1rem;
-      color: #2d241e;
-    }
-
-    .order-bar .cart-info .count-badge {
-      background: #c73d2f;
-      color: white;
-      padding: 0.1rem 0.8rem;
-      border-radius: 60px;
-      font-weight: 700;
-      font-size: 0.9rem;
-      margin-left: 0.3rem;
-    }
-
-    .order-actions {
-      display: flex;
-      gap: 0.8rem;
-      flex-wrap: wrap;
-    }
-
-    .btn-outline {
+    .menu-item:hover { transform: translateY(-4px); box-shadow: 0 20px 36px -16px rgba(0,0,0,0.06); border-color: #d4c6b8; }
+    .menu-item .item-top { display: flex; justify-content: space-between; align-items: flex-start; }
+    .menu-item h3 { font-family: 'Playfair Display', serif; font-size: 1.25rem; }
+    .menu-item .price { font-weight: 700; color: #b34a3c; background: #f5ede8; padding: 0.05rem 1rem; border-radius: 60px; font-size: 1.1rem; }
+    .menu-item .desc { color: #5f5348; font-size: 0.9rem; margin: 0.4rem 0 0.8rem; flex: 1; }
+    .menu-item .meta-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+    .badge-group { display: flex; gap: 0.3rem; flex-wrap: wrap; }
+    .badge { background: #ede7e0; padding: 0.15rem 0.8rem; border-radius: 40px; font-size: 0.6rem; font-weight: 600; text-transform: uppercase; }
+    .badge.veg { background: #e3f0e3; color: #1f6d3b; }
+    .badge.popular { background: #f7edd4; color: #9e7a3e; }
+    .badge.chef { background: #e5dcd3; color: #4d3b2e; }
+    .order-toggle {
       background: transparent;
-      border: 1.5px solid #b7a79a;
-      padding: 0.5rem 1.6rem;
+      border: 1.5px solid #d4c6b8;
+      padding: 0.15rem 1rem;
       border-radius: 60px;
       font-weight: 600;
-      color: #3d352e;
+      font-size: 0.7rem;
       cursor: pointer;
       transition: 0.2s;
-      font-size: 0.9rem;
     }
+    .order-toggle:hover { background: #1e1a16; color: white; border-color: #1e1a16; }
+    .order-toggle.in-cart { background: #1e1a16; color: white; border-color: #1e1a16; }
 
-    .btn-outline:hover {
-      background: white;
-      border-color: #8a7a6a;
-    }
-
-    .btn-primary {
-      background: #c73d2f;
-      border: none;
-      padding: 0.6rem 2.2rem;
-      border-radius: 60px;
-      font-weight: 700;
-      color: white;
-      cursor: pointer;
-      transition: 0.2s;
-      box-shadow: 0 6px 16px -4px rgba(199, 61, 47, 0.3);
+    /* ----- ORDER BAR (sticky at bottom) ----- */
+    .order-bar {
+      position: sticky;
+      bottom: 1rem;
+      background: #f8f4ef;
+      backdrop-filter: blur(8px);
+      border-radius: 2.2rem;
+      padding: 1rem 2rem;
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
-      gap: 0.6rem;
-      font-size: 0.95rem;
+      justify-content: space-between;
+      gap: 1rem;
+      border: 1px solid #e4dad1;
+      box-shadow: 0 12px 40px -12px rgba(0,0,0,0.12);
+      margin-top: 2rem;
+      z-index: 50;
+    }
+    .order-bar .cart-info { display: flex; align-items: center; gap: 0.8rem; }
+    .order-bar .cart-info i { font-size: 1.6rem; color: #b34a3c; background: white; padding: 0.5rem; border-radius: 60px; }
+    .order-bar .count-badge { background: #b34a3c; color: white; padding: 0.05rem 0.9rem; border-radius: 60px; font-weight: 700; }
+    .order-actions { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+
+    /* ----- ABOUT / CHEF ----- */
+    .about-section {
+      background: #fcfaf8;
+      border-radius: 2.5rem;
+      padding: 3rem 2.5rem;
+      margin: 3rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3rem;
+      align-items: center;
+    }
+    .about-text { flex: 1.2; min-width: 280px; }
+    .about-text h2 { font-family: 'Playfair Display', serif; font-size: 2.2rem; }
+    .about-text p { color: #5f5348; margin: 0.8rem 0 1.2rem; }
+    .about-image { flex: 1; min-width: 200px; background: #ede7e0; border-radius: 2rem; padding: 2rem; text-align: center; font-size: 4rem; color: #b34a3c; }
+
+    /* ----- TESTIMONIALS ----- */
+    .testimonials {
+      background: #ffffff;
+      border-radius: 2.5rem;
+      padding: 2.5rem 2rem;
+      margin: 2.5rem 0;
+      border: 1px solid #ede7e0;
+    }
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+    .testimonial-card { background: #f8f4ef; padding: 1.5rem; border-radius: 1.5rem; }
+    .testimonial-card i { color: #b34a3c; font-size: 1.4rem; }
+    .testimonial-card p { font-style: italic; margin: 0.5rem 0; }
+    .testimonial-card .author { font-weight: 600; }
+
+    /* ----- CONTACT / FOOTER ----- */
+    .contact-section {
+      background: #1e1a16;
+      color: #f0ebe4;
+      border-radius: 2.5rem;
+      padding: 3rem 2.5rem;
+      margin: 2rem 0 1rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2.5rem;
+    }
+    .contact-section h4 { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: #f5d6b3; margin-bottom: 0.8rem; }
+    .contact-section a { color: #d4c6b8; transition: 0.2s; }
+    .contact-section a:hover { color: white; }
+    .contact-section .socials { display: flex; gap: 1rem; font-size: 1.4rem; margin-top: 0.8rem; }
+    .footer-bottom {
+      text-align: center;
+      padding: 1.5rem 0 0.5rem;
+      font-size: 0.85rem;
+      color: #7a6a5c;
+      border-top: 1px solid #ede7e0;
+      margin-top: 1rem;
     }
 
-    .btn-primary:hover {
-      background: #b03224;
-      transform: scale(1.02);
-    }
-
-    .btn-primary i {
-      font-size: 1rem;
-    }
-
-    /* ---------- toast / feedback ---------- */
+    /* ----- TOAST ----- */
     .toast-message {
-      background: #1e1e2a;
+      background: #1e1a16;
       color: white;
-      padding: 0.8rem 1.8rem;
+      padding: 0.7rem 2rem;
       border-radius: 60px;
       font-weight: 500;
-      box-shadow: 0 12px 28px -8px rgba(0,0,0,0.2);
+      box-shadow: 0 16px 32px -12px rgba(0,0,0,0.2);
       display: inline-block;
     }
+    .toast-message i { margin-right: 0.6rem; color: #f5d6b3; }
+    #feedbackArea { min-height: 2.8rem; margin-top: 0.5rem; }
 
-    .toast-message i {
-      margin-right: 0.6rem;
-      color: #f5b342;
+    /* ----- RESPONSIVE ----- */
+    @media (max-width: 850px) {
+      .header-inner { flex-direction: column; align-items: stretch; }
+      .nav-links { justify-content: center; }
+      .hero h2 { font-size: 2.4rem; }
+      .about-section { padding: 2rem 1.5rem; }
+      .contact-section { padding: 2rem 1.5rem; }
     }
-
-    #feedbackArea {
-      min-height: 3rem;
-      margin-top: 0.3rem;
-    }
-
-    /* ---------- responsive ---------- */
-    @media (max-width: 750px) {
-      .container {
-        padding: 1.2rem 0.8rem;
-      }
-      .resto-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.8rem;
-      }
-      .menu-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 1.2rem;
-      }
-      .order-bar {
-        flex-direction: column;
-        align-items: stretch;
-        padding: 1.2rem 1.2rem;
-      }
-      .order-actions {
-        justify-content: stretch;
-      }
-      .order-actions button {
-        flex: 1;
-        justify-content: center;
-      }
-    }
-
-    @media (max-width: 500px) {
-      .menu-grid {
-        grid-template-columns: 1fr;
-      }
-      .brand h1 {
-        font-size: 1.6rem;
-      }
-      .tab-btn {
-        padding: 0.5rem 1.2rem;
-        font-size: 0.85rem;
-      }
-      .menu-item .price {
-        font-size: 1.1rem;
-        padding: 0 0.8rem;
-      }
+    @media (max-width: 550px) {
+      .menu-grid { grid-template-columns: 1fr; }
+      .hero h2 { font-size: 1.8rem; }
+      .order-bar { flex-direction: column; align-items: stretch; padding: 1rem; }
+      .order-actions { justify-content: stretch; }
+      .order-actions button { flex: 1; justify-content: center; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <!-- header -->
-    <header class="resto-header">
-      <div class="brand">
-        <i class="fas fa-utensils"></i>
-        <h1>Fork &amp; <span>Flame</span></h1>
-      </div>
-      <div class="tagline">
-        <i class="fas fa-leaf"></i>  fresh · fire · flavor
-      </div>
-    </header>
 
-    <!-- filter tabs -->
-    <div class="menu-tabs" id="tabContainer">
-      <button class="tab-btn active" data-category="all"><i class="fas fa-th-list"></i> All</button>
-      <button class="tab-btn" data-category="starters"><i class="fas fa-bowl-food"></i> Starters</button>
-      <button class="tab-btn" data-category="mains"><i class="fas fa-utensil-spoon"></i> Mains</button>
-      <button class="tab-btn" data-category="pasta"><i class="fas fa-spaghetti"></i> Pasta</button>
-      <button class="tab-btn" data-category="desserts"><i class="fas fa-cake-candles"></i> Desserts</button>
-      <button class="tab-btn" data-category="drinks"><i class="fas fa-wine-bottle"></i> Drinks</button>
-    </div>
+<!-- ===== HEADER ===== -->
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="logo"><i class="fas fa-fire"></i> Fork &amp; <span>Flame</span></div>
+    <nav class="nav-links">
+      <a href="#menu">Menu</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a href="#" class="btn-primary" style="padding:0.4rem 1.4rem; font-size:0.8rem;"><i class="fas fa-calendar-check"></i> Reserve</a>
+    </nav>
+  </div>
+</header>
 
-    <!-- menu grid -->
-    <div id="menuGrid" class="menu-grid">
-      <!-- items will be injected by JavaScript -->
-    </div>
+<!-- ===== HERO ===== -->
+<section class="container hero">
+  <h2>Fire &amp; <span>Flavor</span> — <br />The Art of Dining</h2>
+  <p>Seasonal ingredients, wood‑fire cooking, and timeless recipes. Experience fine dining in a warm, modern setting.</p>
+  <div class="hero-actions">
+    <a href="#menu" class="btn-primary"><i class="fas fa-utensils"></i> Explore Menu</a>
+    <a href="#contact" class="btn-outline"><i class="fas fa-phone-alt"></i> Contact</a>
+  </div>
+</section>
 
-    <!-- interactive order bar -->
-    <div class="order-bar">
-      <div class="cart-info">
-        <i class="fas fa-shopping-bag"></i>
-        <span>Your order</span>
-        <span class="count-badge" id="orderCount">0</span>
-      </div>
-      <div class="order-actions">
-        <button class="btn-outline" id="clearOrderBtn"><i class="fas fa-trash-alt"></i> Clear</button>
-        <button class="btn-primary" id="placeOrderBtn"><i class="fas fa-check"></i> Place order</button>
-      </div>
-    </div>
+<!-- ===== MENU SECTION ===== -->
+<section id="menu" class="container" style="padding-top:1rem;">
+  <h2 class="section-title">Our Menu</h2>
+  <div class="section-divider"></div>
+  <p class="section-sub">Seasonal selections, crafted with precision and passion.</p>
 
-    <!-- feedback -->
-    <div id="feedbackArea"></div>
+  <!-- filters -->
+  <div class="menu-tabs" id="tabContainer">
+    <button class="tab-btn active" data-category="all"><i class="fas fa-th-list"></i> All</button>
+    <button class="tab-btn" data-category="starters"><i class="fas fa-bowl-food"></i> Starters</button>
+    <button class="tab-btn" data-category="mains"><i class="fas fa-utensil-spoon"></i> Mains</button>
+    <button class="tab-btn" data-category="pasta"><i class="fas fa-spaghetti"></i> Pasta</button>
+    <button class="tab-btn" data-category="desserts"><i class="fas fa-cake-candles"></i> Desserts</button>
+    <button class="tab-btn" data-category="drinks"><i class="fas fa-wine-bottle"></i> Drinks</button>
   </div>
 
-  <script>
-    (function() {
-      // ----- MENU DATA -----
-      const menuItems = [
-        { id: 1, name: 'Garlic Bread', category: 'starters', price: 6.50, desc: 'Toasted sourdough, herb butter, roasted garlic.', tags: ['veg', 'popular'] },
-        { id: 2, name: 'Truffle Fries', category: 'starters', price: 8.90, desc: 'Parmesan, rosemary, garlic aioli.', tags: ['veg'] },
-        { id: 3, name: 'Crispy Calamari', category: 'starters', price: 12.50, desc: 'Lightly fried, lemon caper dip.', tags: ['spicy'] },
-        { id: 4, name: 'Grilled Steak', category: 'mains', price: 28.00, desc: 'Sirloin, chimichurri, roasted vegetables.', tags: ['popular'] },
-        { id: 5, name: 'Herb Chicken', category: 'mains', price: 22.50, desc: 'Free-range, lemon thyme, sautéed greens.', tags: [] },
-        { id: 6, name: 'Veggie Bowl', category: 'mains', price: 18.00, desc: 'Quinoa, grilled zucchini, tahini dressing.', tags: ['veg'] },
-        { id: 7, name: 'Spaghetti Carbonara', category: 'pasta', price: 16.90, desc: 'Guanciale, pecorino, egg yolk, black pepper.', tags: ['popular'] },
-        { id: 8, name: 'Pesto Trofie', category: 'pasta', price: 15.50, desc: 'Basil pesto, green beans, potato, pine nuts.', tags: ['veg'] },
-        { id: 9, name: 'Tiramisù', category: 'desserts', price: 8.00, desc: 'Coffee-soaked sponge, mascarpone, cocoa.', tags: ['popular'] },
-        { id: 10, name: 'Panna Cotta', category: 'desserts', price: 7.50, desc: 'Vanilla berry compote, almond crumble.', tags: ['veg'] },
-        { id: 11, name: 'Espresso Martini', category: 'drinks', price: 12.00, desc: 'Vodka, coffee liqueur, fresh espresso.', tags: [] },
-        { id: 12, name: 'House Lemonade', category: 'drinks', price: 5.50, desc: 'Mint, sparkling water, honey.', tags: ['veg'] },
-        { id: 13, name: 'Burrata Salad', category: 'starters', price: 14.00, desc: 'Heirloom tomatoes, basil, balsamic glaze.', tags: ['veg'] },
-        { id: 14, name: 'Lamb Chops', category: 'mains', price: 32.00, desc: 'Grilled, mint pesto, sweet potato purée.', tags: ['popular'] },
-      ];
+  <!-- menu grid -->
+  <div id="menuGrid" class="menu-grid"></div>
 
-      // ----- STATE -----
-      let selectedCategory = 'all';
-      let order = []; // array of item ids
+  <!-- order bar (sticky) -->
+  <div class="order-bar">
+    <div class="cart-info">
+      <i class="fas fa-shopping-bag"></i>
+      <span>Your order</span>
+      <span class="count-badge" id="orderCount">0</span>
+    </div>
+    <div class="order-actions">
+      <button class="btn-outline" id="clearOrderBtn" style="padding:0.3rem 1.4rem;"><i class="fas fa-trash-alt"></i> Clear</button>
+      <button class="btn-primary" id="placeOrderBtn" style="padding:0.4rem 1.8rem; font-size:0.9rem;"><i class="fas fa-check"></i> Place order</button>
+    </div>
+  </div>
+  <div id="feedbackArea"></div>
+</section>
 
-      // DOM refs
-      const grid = document.getElementById('menuGrid');
-      const tabContainer = document.getElementById('tabContainer');
-      const orderCountSpan = document.getElementById('orderCount');
-      const feedback = document.getElementById('feedbackArea');
+<!-- ===== ABOUT ===== -->
+<section id="about" class="container about-section">
+  <div class="about-text">
+    <h2>Where Fire Meets <span style="color:#b34a3c;">Tradition</span></h2>
+    <div class="section-divider" style="margin:0.5rem 0 1.2rem;"></div>
+    <p>At Fork & Flame, we celebrate the primal connection between fire and food. Our kitchen is driven by a wood‑fired hearth, seasonal produce, and a deep respect for classic techniques. Every dish tells a story of craftsmanship and warmth.</p>
+    <p><strong>Chef Marcus Webb</strong> — 18 years of culinary excellence, blending Mediterranean soul with local ingredients.</p>
+    <a href="#" class="btn-primary" style="margin-top:0.8rem;"><i class="fas fa-utensils"></i> Our Story</a>
+  </div>
+  <div class="about-image">
+    <i class="fas fa-fire" style="font-size:5rem;"></i>
+    <p style="font-size:1rem; color:#5f5348; margin-top:0.5rem;">Wood‑fired kitchen</p>
+  </div>
+</section>
 
-      // ----- helpers -----
-      function renderItems(category) {
-        const filtered = category === 'all' 
-          ? menuItems 
-          : menuItems.filter(item => item.category === category);
+<!-- ===== TESTIMONIALS ===== -->
+<section class="container testimonials">
+  <h2 class="section-title" style="font-size:1.8rem;">Guest Stories</h2>
+  <div class="testimonial-grid">
+    <div class="testimonial-card"><i class="fas fa-star"></i><p>"Incredible flavors and a welcoming atmosphere. The lamb chops were unforgettable."</p><div class="author">— Emma R.</div></div>
+    <div class="testimonial-card"><i class="fas fa-star"></i><p>"The truffle fries and the tiramisù are perfection. A true gem in the city."</p><div class="author">— David K.</div></div>
+    <div class="testimonial-card"><i class="fas fa-star"></i><p>"Every dish is a work of art. The service is impeccable, and the wine list is superb."</p><div class="author">— Sophia L.</div></div>
+  </div>
+</section>
 
-        if (filtered.length === 0) {
-          grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:2rem; color:#7a6a5c; background:#faf7f2; border-radius:2rem;">
-            <i class="fas fa-utensils" style="font-size:2rem; opacity:0.5;"></i>
-            <p style="margin-top:0.5rem;">No dishes in this section</p>
-          </div>`;
-          return;
-        }
+<!-- ===== CONTACT / FOOTER ===== -->
+<footer id="contact" class="container contact-section">
+  <div>
+    <h4><i class="fas fa-location-dot"></i> Visit</h4>
+    <p>48 Gastronome Lane<br />Downtown, NY 10012</p>
+    <p style="margin-top:0.4rem;"><i class="fas fa-clock"></i> Tue–Sat 5pm – 11pm</p>
+  </div>
+  <div>
+    <h4><i class="fas fa-phone"></i> Contact</h4>
+    <p><a href="tel:+15551234567">(555) 234-5678</a></p>
+    <p><a href="mailto:hello@forkflame.com">hello@forkflame.com</a></p>
+    <div class="socials">
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-tiktok"></i></a>
+    </div>
+  </div>
+  <div>
+    <h4><i class="fas fa-envelope"></i> Reserve</h4>
+    <p>Book your table online or call us directly.</p>
+    <a href="#" class="btn-primary" style="margin-top:0.6rem; padding:0.5rem 1.6rem; font-size:0.85rem;"><i class="fas fa-calendar-check"></i> Reserve now</a>
+  </div>
+</footer>
+<div class="container footer-bottom">
+  &copy; 2026 Fork & Flame · fine dining · crafted with <i class="fas fa-heart" style="color:#b34a3c;"></i>
+</div>
 
-        let html = '';
-        filtered.forEach(item => {
-          const isInOrder = order.includes(item.id);
-          const tagsHtml = item.tags.map(t => {
-            let cls = 'badge';
-            if (t === 'veg') cls += ' veg';
-            else if (t === 'spicy') cls += ' spicy';
-            else if (t === 'popular') cls += ' popular';
-            return `<span class="${cls}"><i class="fas fa-${t === 'veg' ? 'seedling' : t === 'spicy' ? 'pepper' : 'star'}"></i> ${t}</span>`;
-          }).join('');
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+  (function() {
+    // ----- MENU DATA (complete) -----
+    const menuItems = [
+      { id: 1, name: 'Burrata & Fig', category: 'starters', price: 14.50, desc: 'Creamy burrata, roasted figs, balsamic glaze, pine nuts.', tags: ['veg', 'chef'] },
+      { id: 2, name: 'Truffle Fries', category: 'starters', price: 9.50, desc: 'Parmesan, rosemary, black truffle oil, garlic aioli.', tags: ['veg', 'popular'] },
+      { id: 3, name: 'Crispy Calamari', category: 'starters', price: 13.00, desc: 'Lightly fried, lemon caper dip, smoked paprika.', tags: [] },
+      { id: 4, name: 'Grass-Fed Steak', category: 'mains', price: 32.00, desc: 'Sirloin, chimichurri, heritage carrots, bone marrow butter.', tags: ['popular', 'chef'] },
+      { id: 5, name: 'Herb Chicken', category: 'mains', price: 24.00, desc: 'Free-range, lemon thyme, sautéed greens, wild rice pilaf.', tags: [] },
+      { id: 6, name: 'Harvest Bowl', category: 'mains', price: 19.50, desc: 'Quinoa, grilled zucchini, avocado, tahini, pumpkin seeds.', tags: ['veg'] },
+      { id: 7, name: 'Carbonara', category: 'pasta', price: 17.50, desc: 'Guanciale, pecorino, farm egg yolk, black pepper.', tags: ['popular'] },
+      { id: 8, name: 'Pesto Trofie', category: 'pasta', price: 16.00, desc: 'Basil pesto, green beans, potato, pine nuts, parmesan.', tags: ['veg'] },
+      { id: 9, name: 'Tiramisù', category: 'desserts', price: 9.00, desc: 'Coffee-soaked sponge, mascarpone, dark cocoa.', tags: ['popular', 'chef'] },
+      { id: 10, name: 'Panna Cotta', category: 'desserts', price: 8.50, desc: 'Vanilla bean, berry compote, almond crumble.', tags: ['veg'] },
+      { id: 11, name: 'Espresso Martini', category: 'drinks', price: 13.00, desc: 'Vodka, coffee liqueur, fresh espresso, chocolate bitters.', tags: [] },
+      { id: 12, name: 'House Lemonade', category: 'drinks', price: 6.00, desc: 'Mint, sparkling water, honey, fresh lemon.', tags: ['veg'] },
+      { id: 13, name: 'Grilled Octopus', category: 'starters', price: 17.00, desc: 'Charred octopus, romesco, fingerling potatoes.', tags: ['chef'] },
+      { id: 14, name: 'Lamb Chops', category: 'mains', price: 34.00, desc: 'Mint pesto, sweet potato purée, grilled asparagus.', tags: ['popular'] },
+    ];
 
-          html += `
-            <div class="menu-item" data-id="${item.id}">
-              <div class="item-header">
-                <h3>${item.name}</h3>
-                <span class="price">$${item.price.toFixed(2)}</span>
-              </div>
-              <p class="desc">${item.desc}</p>
-              <div class="badge-group">
-                ${tagsHtml}
-                <button class="btn-outline order-toggle" style="margin-left:auto; padding:0.2rem 1.2rem; font-size:0.75rem; border-radius:40px;" data-id="${item.id}">
-                  ${isInOrder ? '<i class="fas fa-minus-circle"></i> Remove' : '<i class="fas fa-plus-circle"></i> Add'}
-                </button>
-              </div>
+    // ----- STATE -----
+    let selectedCategory = 'all';
+    let order = [];
+
+    const grid = document.getElementById('menuGrid');
+    const tabContainer = document.getElementById('tabContainer');
+    const orderCountSpan = document.getElementById('orderCount');
+    const feedback = document.getElementById('feedbackArea');
+
+    // ----- RENDER -----
+    function renderItems(category) {
+      const filtered = category === 'all' ? menuItems : menuItems.filter(i => i.category === category);
+      if (!filtered.length) {
+        grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:2rem; color:#7a6a5c; background:#f8f4ef; border-radius:2rem;">
+          <i class="fas fa-utensils" style="font-size:2rem; opacity:0.3;"></i>
+          <p style="margin-top:0.5rem;">No dishes in this section</p>
+        </div>`;
+        return;
+      }
+      let html = '';
+      filtered.forEach(item => {
+        const inCart = order.includes(item.id);
+        const tagsHtml = item.tags.map(t => {
+          let cls = 'badge';
+          if (t === 'veg') cls += ' veg';
+          else if (t === 'popular') cls += ' popular';
+          else if (t === 'chef') cls += ' chef';
+          return `<span class="${cls}"><i class="fas fa-${t === 'veg' ? 'seedling' : t === 'popular' ? 'star' : 'crown'}"></i> ${t}</span>`;
+        }).join('');
+        html += `
+          <div class="menu-item">
+            <div class="item-top">
+              <h3>${item.name}</h3>
+              <span class="price">$${item.price.toFixed(2)}</span>
             </div>
-          `;
-        });
-        grid.innerHTML = html;
-      }
-
-      // update order count & UI (toggle buttons)
-      function updateOrderUI() {
-        orderCountSpan.textContent = order.length;
-        // update all toggle buttons to reflect order state
-        document.querySelectorAll('.order-toggle').forEach(btn => {
-          const id = parseInt(btn.dataset.id);
-          const inOrder = order.includes(id);
-          btn.innerHTML = inOrder 
-            ? '<i class="fas fa-minus-circle"></i> Remove' 
-            : '<i class="fas fa-plus-circle"></i> Add';
-        });
-        // also update any extra UI feedback
-      }
-
-      // show toast
-      function showMessage(msg, isGood = true) {
-        feedback.innerHTML = `
-          <div class="toast-message" style="background: ${isGood ? '#1e1e2a' : '#8b2c1f'};">
-            <i class="fas ${isGood ? 'fa-check-circle' : 'fa-triangle-exclamation'}"></i> ${msg}
+            <p class="desc">${item.desc}</p>
+            <div class="meta-row">
+              <div class="badge-group">${tagsHtml}</div>
+              <button class="order-toggle ${inCart ? 'in-cart' : ''}" data-id="${item.id}">
+                ${inCart ? '<i class="fas fa-minus-circle"></i> Remove' : '<i class="fas fa-plus-circle"></i> Add'}
+              </button>
+            </div>
           </div>
         `;
-        setTimeout(() => { feedback.innerHTML = ''; }, 4000);
-      }
-
-      // ----- event listeners -----
-      // 1. tabs
-      tabContainer.addEventListener('click', (e) => {
-        const btn = e.target.closest('.tab-btn');
-        if (!btn) return;
-        const cat = btn.dataset.category;
-        if (!cat) return;
-
-        // update active class
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-
-        selectedCategory = cat;
-        renderItems(selectedCategory);
-        // re-sync order UI after re-render
-        updateOrderUI();
       });
+      grid.innerHTML = html;
+    }
 
-      // 2. grid events (add/remove via order-toggle)
-      grid.addEventListener('click', (e) => {
-        const btn = e.target.closest('.order-toggle');
-        if (!btn) return;
+    function updateOrderUI() {
+      orderCountSpan.textContent = order.length;
+      document.querySelectorAll('.order-toggle').forEach(btn => {
         const id = parseInt(btn.dataset.id);
-        if (isNaN(id)) return;
-
-        const idx = order.indexOf(id);
-        if (idx > -1) {
-          // remove
-          order.splice(idx, 1);
-          showMessage(`Removed from order`, true);
-        } else {
-          // add
-          order.push(id);
-          showMessage(`Added to order!`, true);
-        }
-        updateOrderUI();
-        // refresh button states (we re-render the grid to keep badges synced, but we can just update toggles)
-        // we re-render to keep consistency with tags and avoid mismatch
-        renderItems(selectedCategory);
-        updateOrderUI(); 
+        const inCart = order.includes(id);
+        btn.classList.toggle('in-cart', inCart);
+        btn.innerHTML = inCart ? '<i class="fas fa-minus-circle"></i> Remove' : '<i class="fas fa-plus-circle"></i> Add';
       });
+    }
 
-      // 3. clear order
-      document.getElementById('clearOrderBtn').addEventListener('click', () => {
-        if (order.length === 0) {
-          showMessage('Order is already empty', false);
-          return;
-        }
-        order = [];
-        updateOrderUI();
-        renderItems(selectedCategory);
-        updateOrderUI();
-        showMessage('Order cleared', true);
-      });
+    function showMessage(msg, isGood = true) {
+      feedback.innerHTML = `<div class="toast-message" style="background:${isGood ? '#1e1a16' : '#8b2c1f'};">
+        <i class="fas ${isGood ? 'fa-check-circle' : 'fa-triangle-exclamation'}"></i> ${msg}</div>`;
+      setTimeout(() => feedback.innerHTML = '', 4200);
+    }
 
-      // 4. place order
-      document.getElementById('placeOrderBtn').addEventListener('click', () => {
-        if (order.length === 0) {
-          showMessage('Add at least one dish!', false);
-          return;
-        }
-        // get names
-        const names = order.map(id => {
-          const item = menuItems.find(m => m.id === id);
-          return item ? item.name : '?';
-        });
-        showMessage(`✅ Order placed: ${names.join(', ')}. Thank you!`, true);
-        // optionally clear order after place? we keep it but we can clear if desired
-        // we'll clear after 2 sec (optional)
-        setTimeout(() => {
-          order = [];
-          updateOrderUI();
-          renderItems(selectedCategory);
-          updateOrderUI();
-        }, 2000);
-      });
-
-      // ----- INIT -----
-      renderItems('all');
+    // ----- EVENTS -----
+    tabContainer.addEventListener('click', (e) => {
+      const btn = e.target.closest('.tab-btn');
+      if (!btn) return;
+      const cat = btn.dataset.category;
+      if (!cat) return;
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      selectedCategory = cat;
+      renderItems(selectedCategory);
       updateOrderUI();
-    })();
-  </script>
+    });
+
+    grid.addEventListener('click', (e) => {
+      const btn = e.target.closest('.order-toggle');
+      if (!btn) return;
+      const id = parseInt(btn.dataset.id);
+      const idx = order.indexOf(id);
+      if (idx > -1) { order.splice(idx, 1); showMessage('Removed', true); }
+      else { order.push(id); showMessage('Added to order', true); }
+      renderItems(selectedCategory);
+      updateOrderUI();
+    });
+
+    document.getElementById('clearOrderBtn').addEventListener('click', () => {
+      if (!order.length) { showMessage('Order is empty', false); return; }
+      order = []; renderItems(selectedCategory); updateOrderUI(); showMessage('Order cleared', true);
+    });
+
+    document.getElementById('placeOrderBtn').addEventListener('click', () => {
+      if (!order.length) { showMessage('Please add at least one dish', false); return; }
+      const names = order.map(id => menuItems.find(m => m.id === id)?.name || '?');
+      showMessage(`✅ Order placed: ${names.join(', ')}. Thank you!`, true);
+      setTimeout(() => { order = []; renderItems(selectedCategory); updateOrderUI(); }, 2000);
+    });
+
+    // ----- INIT -----
+    renderItems('all');
+    updateOrderUI();
+  })();
+</script>
 </body>
 </html>
